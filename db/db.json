@@ -1,6 +1,21 @@
-[
-    {
-        "title":"Test Title",
-        "text":"Test text"
-    }
-]
+{
+    "notes": [
+        {
+            "title": "first note",
+            "text": "Walk the dog",
+            "id": "0"
+        },
+
+        {
+            "title": "second note",
+            "text": "Go to the gym",
+            "id": "1"
+        },
+
+        {
+            "title": "third note",
+            "text": "Get ready for work",
+            "id": "2"
+        }
+    ]
+}
