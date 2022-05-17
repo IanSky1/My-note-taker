@@ -18,6 +18,27 @@ function createNewNote(body, noteArray) {
         JSON.stringify({ note: noteArray }, null, 2)
     );
     return newNote;
+};
+
+function findById(id, noteArray) {
+    const result = noteArray.filter(note => note.id === id)[0];
+    return result;
+};
+
+function deleteNote(id, noteArray) {
+    for (let i = 0; i < noteArray.length; i++) {
+        let note = noteArray[i];
+
+        if (note.id === id) {
+            noteArray.splice(i, 1);
+            fs.writeFileSync(
+                path.join(__dirname, './db/db.json'),
+                JSON.stringify(noteArray, null, 2)
+            );
+
+            break;
+        }
+    }
 }
 
 
