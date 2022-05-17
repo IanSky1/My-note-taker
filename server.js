@@ -41,10 +41,43 @@ function deleteNote(id, noteArray) {
     }
 }
 
+app.get("/api/notes", (req, res) => {
+    let results = notes;
+    res.json(results);
+});
 
+app.get('/api/notes/:id', (req, res) => {
+    const result = findById(req.params.id, notes);
+    if (result) {
+        res.json(result);
+    } else {
+        res.send(404);
+    }  
+});
 
-require("./routing/html-routes")(app);
-require("./routing/api-routes")(app);
+app.post('/api/notes', (req, res) => {
+    req.body.id = notes.length.toString();
+    const addnote = createNewNote(req.body, notes);
+    
+    res.json(addnote);
+});
+
+app.delete("/api/notes/:id", (req, res) => {
+    deleteNote(req.params.id, addnote);
+    res.json(true);
+});
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
+app.get("/notes", (req, res) => {
+    res.sendFile(path.join(__dirname, './public/notes.html'));
+  });
+  
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+  });
 
 app.listen(PORT, function() {
   console.log("App listening on PORT " + PORT);
